@@ -1,0 +1,7 @@
+{
+  "name": "Back-end YouTube Player",
+  "description": "Back-end YouTube Player",
+  "repository": "https://github.com/koval01/youtube_player_backend",
+  "logo": "https://rawgit.com/heroku/node-js-sample/master/public/node.svg",
+  "keywords": ["node", "express", "static"]
+}
