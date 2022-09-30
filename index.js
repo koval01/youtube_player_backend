@@ -108,8 +108,9 @@ app.post('/get_video', async (req, resp) => {
                         ]
 
                     }).then(output => {
-                        let result = get_content_(output.formats)
-                        redis.set(json_body.video_id, JSON.stringify(result), "ex", 900)
+                        // let result = get_content_(output.formats)
+                        let result = output
+                        redis.set(json_body.video_id, JSON.stringify(result), "ex", 600)
                         return response_call(result)
                     })
                 }
