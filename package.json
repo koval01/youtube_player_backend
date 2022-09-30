@@ -1,0 +1,35 @@
+{
+  "name": "youtube_player_backend",
+  "version": "1.0.0",
+  "description": "Back-end YouTube Player",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^6.6.0",
+    "dotenv": "^16.0.1",
+    "ioredis": "^5.2.3",
+    "youtube-dl-exec": "^2.1.5"
+  },
+  "engines": {
+    "node": "18.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koval/youtube_player_backend"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "author": "Yaroslav Koval",
+  "contributors": [
+    "Yaroslav Koval <yaroslav@koval.page> (https://koval.page"
+  ],
+  "license": "MIT"
+}
