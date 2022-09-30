@@ -33,8 +33,7 @@ app.post('/get_video', async (req, resp) => {
 
     function get_content_(data) {
         let result = {
-            video: {},
-            high_resolution_video: {}
+            video: {}
         }
         let collector = []
 
@@ -70,14 +69,13 @@ app.post('/get_video', async (req, resp) => {
                 if (data[i].asr) {
                     if (data[i].resolution == "audio only" && data[i].asr == 48000) {
                         collector.push(data[i])
-
                         sort_coll_()
                         result.audio = builder_(collector[0], audio=true)
-                    } else if (["640x360", "1280x720"].includes(data[i].resolution)) {
-                        result.video[data[i].resolution.toString().slice(-4)] = builder_(data[i])
+                    } else if (["360p", "720p"].includes(data[i].format_note)) {
+                        result.video[`q${data[i].format_note}`] = builder_(data[i])
                     } 
-                } else if (["1920x1080", "2560x1440"].includes(data[i].resolution)) {
-                    result.high_resolution_video[data[i].resolution.toString().slice(-5)] = builder_(data[i])
+                } else if (["144p", "240p", "480p", "720p", "1080p", "1440p"].includes(data[i].format_note)) {
+                    result.video[`q${data[i].format_note}`] = builder_(data[i])
                 }
             }
         }
@@ -108,7 +106,7 @@ app.post('/get_video', async (req, resp) => {
                         ]
 
                     }).then(output => {
-                        // let result = get_content_(output.formats)
+                        output.formats = get_content_(output.formats)
                         let result = output
                         redis.set(json_body.video_id, JSON.stringify(result), "ex", 600)
                         return response_call(result)
