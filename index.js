@@ -74,7 +74,7 @@ app.post('/getVideo', async (req, resp) => {
                     } else if (["360p", "720p"].includes(data[i].format_note)) {
                         result.video[`q${data[i].format_note}`] = builder_(data[i])
                     } 
-                } else if (["144p", "240p", "480p", "720p", "1080p", "1440p"].includes(data[i].format_note)) {
+                } else if (["144p", "240p", "480p", "720p", "1080p", "1440p", "2160p"].includes(data[i].format_note)) {
                     result.video[`q${data[i].format_note}`] = builder_(data[i])
                 }
             }
