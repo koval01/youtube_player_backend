@@ -28,7 +28,7 @@ const apiLimiter = rateLimit({
 })
 app.use(apiLimiter)
 
-app.post('/get_video', async (req, resp) => {
+app.post('/getVideo', async (req, resp) => {
     let json_body = req.body
 
     function get_content_(data) {
