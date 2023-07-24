@@ -2,13 +2,12 @@ require('dotenv').config()
 
 const { promisify } = require('util');
 
-const request = require('request')
 const compression = require('compression')
 const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 const express = require('express')
 const Redis = require("ioredis")
-const youtubedl = require('youtube-dl-exec')
+const YouTube = require('youtube-dl-exec')
 
 const app = express()
 const redis = new Redis(process.env.REDIS_URL)
@@ -23,7 +22,7 @@ const getRedisAsync = promisify(redis.get).bind(redis)
 const setRedisAsync = promisify(redis.set).bind(redis)
 
 const apiLimiter = rateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
+	windowMs: 60 * 1000, // 1 minute
 	max: 250,
 	standardHeaders: true,
     message: {
@@ -60,7 +59,7 @@ const get_content_ = (data) => {
     for (let i = 0; i < data.length; i++) {
         if (typeof data[i].asr !== 'undefined') {
             if (data[i].asr) {
-                if (data[i].resolution == "audio only" && data[i].asr == 48000) {
+                if (data[i].resolution === "audio only" && data[i].asr === 48000) {
                     if (!smallestAudioFile || data[i].filesize < smallestAudioFile.filesize) {
                         smallestAudioFile = data[i]
                         result.audio = builder_(data[i], true)
@@ -96,7 +95,7 @@ app.post('/getVideo', async (req, resp) => {
             })
         }
 
-        const output = await youtubedl(`https://www.youtube.com/watch?v=${video_id}`, {
+        const output = await YouTube(`https://www.youtube.com/watch?v=${video_id}`, {
             dumpSingleJson: true,
             noCheckCertificates: true,
             noWarnings: true,
