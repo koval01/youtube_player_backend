@@ -7,7 +7,7 @@ const compression = require('compression')
 const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 const express = require('express')
-const redis = require("ioredis")
+const Redis = require("ioredis")
 const youtubedl = require('youtube-dl-exec')
 
 const app = express()
