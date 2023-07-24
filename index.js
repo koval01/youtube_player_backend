@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { promisify } = require('util');
+const { promisify } = require('util')
 
 const compression = require('compression')
 const cors = require('cors')
@@ -72,6 +72,13 @@ const get_content_ = (data) => {
             }
         }
     }
+
+    result.view_count = data.view_count || 0
+    result.like_count = data.like_count || 0
+    result.tags = data.tags || []
+    result.description = data.description || ""
+    result.release_timestamp = data.release_timestamp || ""
+
     return result
 }
 
